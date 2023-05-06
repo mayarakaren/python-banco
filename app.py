@@ -35,6 +35,18 @@ def salvar():
         MessageBox.showinfo("Mensagem", "Cadastro Realizado com sucesso!")
         conectar.close()
 
+def excluir():
+    if(txt_codigo.get() == ""):
+        MessageBox.showinfo("ALERT", "Digite o código para deletar")
+    else:
+        conectar = mysql.connect(host="localhost", user="root", password="", database="exemplo")
+        cursor = conectar.cursor()
+        cursor.execute("DELETE FROM teste WHERE codigo='"+ txt_codigo.get() +"'")
+        cursor.execute("commit")
+        MessageBox.showinfo("Mensagem", "Informação Excluída com Sucesso!")
+        conectar.close()
+
 btn_cadastrar = Button(interface, text="Salvar", command=salvar, font=("Arial 12")).place(x=100, y=190)
+btn_excluir = Button(interface, text="Apagar", command=excluir, font=("Arial 12")).place(x=200, y=190)
 
 interface.mainloop()
